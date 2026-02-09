@@ -23,9 +23,13 @@ STEP 6: Use zscore of to remove outliers
 # Coding and Output
 
 import pandas as pd
+
 import numpy as np
+
 from scipy import stats
+
 import seaborn as sns
+
 import matplotlib.pyplot as plt
 
 df1 = pd.read_csv('Loan_data.csv')
