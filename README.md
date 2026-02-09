@@ -79,7 +79,46 @@ plt.show()
 
 <img width="764" height="582" alt="Screenshot 2026-02-05 100539" src="https://github.com/user-attachments/assets/d61951bb-147e-480c-b141-bd317c0049c0" />
 
+Q1 = df2['ApplicantIncome'].quantile(0.25)
+Q3 = df2['ApplicantIncome'].quantile(0.75)
+IQR = Q3 - Q1
+print("IQR:", IQR)
+
+<img width="1669" height="62" alt="Screenshot 2026-02-09 101635" src="https://github.com/user-attachments/assets/acd06087-83cc-48b8-b706-e933031c3763" />
+
+outliers_iqr = df2[
+    (df2['ApplicantIncome'] < (Q1 - 1.5 * IQR)) |
+    (df2['ApplicantIncome'] > (Q3 + 1.5 * IQR))
+]
+outliers_iqr
+
+<img width="1703" height="792" alt="Screenshot 2026-02-09 101805" src="https://github.com/user-attachments/assets/51704b22-0707-469b-aa2d-a1e8ba937d37" />
+
+data_cleaned = df2[
+    ~((df2['ApplicantIncome'] < (Q1 - 1.5 * IQR)) |
+      (df2['ApplicantIncome'] > (Q3 + 1.5 * IQR)))
+]
+data_cleaned
+
+<img width="1690" height="498" alt="Screenshot 2026-02-09 102017" src="https://github.com/user-attachments/assets/6a12c1bd-6ede-4e1c-bf1e-719b9e81d5f1" />
+
+data = [1,12,15,18,21,24,27,30,33,36,39,42,45,48,51,
+        54,57,60,63,66,69,72,75,78,81,84,87,90,93]
+
+df3 = pd.DataFrame(data, columns=['values'])
+df3
+
+z_scores = np.abs(stats.zscore(df3))
+z_scores
+
+threshold = 3
+outliers_z = df3[z_scores > threshold]
+print("Outliers:")
+outliers_z
+
+df3_cleaned = df3[z_scores <= threshold]
+df3_cleaned
 
 
 # Result
-          <<include your Result here>>
+          Thus we have cleaned the data and removed the outliers by detection using IQR and Z-score method
